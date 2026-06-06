@@ -255,6 +255,5 @@ mod tests {
         let _: Option<Box<dyn Planner>> = None;
     }
 }
-/ /   t e s t   d i r e c t   p u s h  
- p u b   m o d   a u t h ;  
- 
+
+pub mod auth;
