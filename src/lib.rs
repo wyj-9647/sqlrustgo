@@ -256,4 +256,5 @@ mod tests {
     }
 }
 
-pub mod auth;
+pub mod auth;p u b   m o d   n e w _ f e a t u r e ;  
+ 
