@@ -256,4 +256,5 @@ mod tests {
     }
 }
 / /   t e s t   d i r e c t   p u s h  
+ p u b   m o d   a u t h ;  
  
