@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build (for manual trigger)'
+        required: false
+        type: string
+  push:
+    branches:
+      - main
+      - rc/*
+      - release/*
+      - ga/*
+      - develop/*
+      - feature/*
+  pull_request:
+    branches:
+      - main
+      - rc/*
+      - release/*
+      - ga/*
+      - develop/*
+      - feature/*
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Rust
+        run: |
+          rustup install stable
+          rustup default stable
+          rustup component add clippy rustfmt
+
+      - name: Format Check
+        run: cargo fmt --all -- --check
+
+      - name: Clippy
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: Build
+        run: cargo build --all
+
+      - name: Test
+        run: cargo test --all
